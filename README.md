@@ -8,6 +8,9 @@ The one feature I implemented heavily relies on the FastLED Palette. The webpage
 
 The webpage JavaScript is done with KnockoutJs in TypeScript. Other tooling for it is done via npm. See the web folder. An overview of the web portion is featured in the youtube video.
 
+## Wifi Config
+Rename the `example.wifi.config.json` in the SPIFFS `data` folder to `wifi.config.json` and fill in your access point credentials.
+
 ## Useful Tutorials and Docs:
 Getting aquainted with the nodemcu esp8266
 - https://randomnerdtutorials.com/getting-started-with-esp8266-wifi-transceiver-review/
