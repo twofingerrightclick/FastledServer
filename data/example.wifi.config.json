@@ -1,0 +1,17 @@
+{
+    "numAps": 3,
+    "aps": [
+        {
+            "ssid": "nameofAccessPoint",
+            "secret": "securePassword"
+        },
+        {
+            "ssid": "asdasdasdasd",
+            "secret": "asdasdasdasd"
+        },
+        {
+            "ssid": "asdasdasdasd",
+            "secret": "asdasdasdasd"
+        }
+    ]
+}

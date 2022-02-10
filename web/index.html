@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>BEN LEDZ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+    <div class="controls">
+        <div>
+            <h7>Brightness - <span data-bind="text: brightness"></span></h7>
+            <div class="slidecontainer" style="width: 60vw;">
+                <input type="range" min="5" max="250" value="5" class="slider"
+                    data-bind="value: brightness, valueUpdate: 'input'">
+            </div>
+        </div>
+
+        <div class="container palette-controls" style="font-family: 'Roboto Mono';">
+            <div class="row">
+                <div class="col" data-bind="with: palette">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> </th>
+                                <th>color</th>
+                                <th>anchor</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: colors">
+                            <tr>
+                                <td data-bind="text: index"></td>
+                                <td><input type="color" data-bind="value: hex"></td>
+                                <td><input type="number" data-bind="value: anchorPoint" style="width: 50px;" min="0"
+                                        max="255" /></td>
+                                <td><button type="button" data-bind="click: $parent.removeColor"
+                                        class="btn btn-primary">-</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-group">
+                        <button type="button" data-bind="click: addColor" class="btn btn-primary">+</button>
+                        <button type="button" data-bind="click: removeColor" class="btn btn-primary">-</button>
+                    </div>
+                </div>
+
+
+                <div class="col ">
+                    <div class="commands">
+                        <button class="btn btn-secondary btn-sm" data-bind="click: setSolidColor">Set Solid
+                            Color</button>
+
+                        <button class="btn btn-secondary btn-sm" data-bind="click: setGradient">Set Gradient</button>
+
+                        <button class="btn btn-secondary btn-sm" data-bind="click: flowPalette">Flow</button>
+
+                        <button class="btn btn-warning btn-sm" data-bind="click: setStopAnimations">Stop
+                            Animation</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h7># of Colors to use from palette - <span data-bind="text: numbersOfColorsToUseFromPalette"></span></h7>
+                <div class="slidecontainer" style="width: 60vw;">
+                    <input type="range" min="0" step="1" class="slider"
+                        data-bind="value: numbersOfColorsToUseFromPaletteIndex, valueUpdate: 'input', attr: {max:  validNumbersOfColorsToUseFromPalette.length - 1}">
+                </div>
+            </div>
+            <div>
+                <h7># of LEDS Per Palette Color - <span data-bind="text: numberOfLedsPerPaletteColor"></span>
+                </h7>
+                <div class="slidecontainer" style="width: 60vw;">
+                    <input type="range" min="1" value="5" class="slider"
+                        data-bind="value: numberOfLedsPerPaletteColor, valueUpdate: 'input', attr: {max: NUM_LEDS}">
+                </div>
+            </div>
+            <div>
+                <h7>Speed - <span data-bind="text: speed"></span>ms</h7>
+                <div class="slidecontainer" style="width: 60vw;">
+                    <input type="range" min="1" max="1000" value="5" class="slider"
+                        data-bind="value: speed, valueUpdate: 'input'">
+                </div>
+            </div>
+          
+            <div style="flex-wrap: wrap; flex-direction: column; display: flex; margin-top: 60px;">
+                <h7>ip of esp8266 server:</h7>
+                <input type="text" data-bind="value: serverAddress" style="width: 10em;" />
+                <h7># of leds</h7>
+                <input type="number" data-bind="value: numLedsInput" style="width: 50px;" />
+            </div>
+
+            <!--here-->
+            <script async=false defer=false src="./dist/index.js"></script>
+
+            <script async=false defer=false id="knockout"
+                src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+            <script async=false defer=false id="lodash"
+                src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+        </div>
+</body>
+
+<style>
+    .controls {
+        /* font: font-weight font-variant 
+               font-size font-style */
+        font-family: 'Roboto Mono', monospace;
+        color: white;
+        font-size: 15px;
+        margin: 10px;
+        padding: 10px;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-items: center;
+        justify-content: flex-start;
+
+    }
+
+    .controls>* {
+        margin: 15px 0px 15px 0px;
+    }
+
+    .commands>* {
+        margin: 5px 5px 5px 5px;
+    }
+
+    body {
+        background-color: rgb(19, 19, 19);
+    }
+
+    .title {
+        margin: 1px;
+        margin-bottom: 0px;
+    }
+
+    .palette-controls {
+        margin-top: 3px;
+    }
+
+    .flex-button-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-items: center;
+        justify-content: flex-start;
+    }
+
+    .flex-button-container>button {
+        margin: 3px;
+    }
+
+    .slidecontainer{
+        margin-top: 5px;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #433a63;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #20b8ff;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #04AA6D;
+        cursor: pointer;
+    }
+</style>
+
+</html>
